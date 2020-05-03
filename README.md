@@ -14,6 +14,6 @@ Exercise to practice with rest apis and GraphQL
 
 "npm install" to install previous packages
 
-"npm start" to run app and open url http://localhosta:1234
+"npm start" to run app and open url http://localhost:1234
 
 
