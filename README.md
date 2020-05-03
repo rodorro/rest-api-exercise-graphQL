@@ -1,2 +1,2 @@
-# rest-api-exercise-graphQL
-Rest api exercise with GraphQL
+# rest-api-exercise
+Exercise to practice with rest apis
