@@ -96,3 +96,9 @@ router.route('/:id')
     });
 
 module.exports = router;
+
+module.exports.getCarData = getCarData;
+
+module.exports.getNextAvailableId = getNextAvailableId;
+
+module.exports.saveCarData = saveCarData;

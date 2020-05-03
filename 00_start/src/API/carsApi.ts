@@ -1,27 +1,55 @@
-import { Car } from './carsApiModel';
-import axios from 'axios';
+const { GraphQLClient } = require("graphql-request");
 const baseUrl = 'http://localhost:3050';
 
+const graphqlBaseUrl = `${baseUrl}/graphql`;
+
+const graphqlClient = new GraphQLClient(graphqlBaseUrl);
+
 export const getAllCars = () => {
-    return axios.get<Car[]>(`${baseUrl}/api/cars`).then(result => {
-        return result.data;
-    });
-}
+    const query = `
+        query {
+          cars {
+            car_id
+            name
+            brand
+            year_release
+          }
+        }
+    `;
+  
+    return graphqlClient
+      .request(query)
+      .then(response => response.cars);
+  };
 
-export const getCarById = (id) => {
-    return axios.get<Car>(`${baseUrl}/api/cars/${id}`).then(result => {
-        return result.data;
-    });
-}
+  export const getCarById = id => {
+    const query = `
+        query {
+          car(id: ${id}) {
+            car_id
+            name
+            brand
+            year_release
+          }
+        }
+    `;
+  
+    return graphqlClient
+      .request(query)
+      .then(response => response.car)
+  };
 
-export const addCar = (car) => {
-    return axios.post<Car>(`${baseUrl}/api/cars`, car);
-};
-
-export const updateCar = (id, car) => {
-    return axios.put<Car>(`${baseUrl}/api/cars/${id}`, car);
-};
-
-export const deleteCar = (id) => {
-    return axios.delete(`${baseUrl}/api/cars/${id}`);
+  export const addCar = car => {
+    console.log(car);
+    const query = `
+        mutation($newCar: CarEdit!){
+          saveCar(carEdit: $newCar)
+        }
+    `;
+  
+    return graphqlClient
+      .request(query, {
+        newCar: car
+      })
+      .then(response => response.saveCar)
 };

@@ -46,38 +46,4 @@ document.addEventListener('DOMContentLoaded', () => {
                 addCarRows(result, 'cars-table');
             });
     });
-    
-    const buttonUpdateCar = document.getElementById('update');
-    buttonUpdateCar.addEventListener('click', (event) => {
-        event.stopPropagation();
-        event.preventDefault();
-        const car = retrieveCarForm();
-        const carId = retrieveCarId();
-        
-        updateCar(carId, car)
-            .then((_) => {
-                cleanTable('cars-table');
-                return getAllCars();
-            })
-            .then((result) => {
-                addCarRows(result, 'cars-table');
-            });
-    });
-    
-    const buttonDeleteCar = document.getElementById('delete');
-    buttonDeleteCar.addEventListener('click', (event) => {
-        event.stopPropagation();
-        event.preventDefault();
-        const carId = retrieveCarId();
-        
-        deleteCar(carId)
-            .then((_) => {
-                cleanTable('cars-table');
-                return getAllCars();
-            })
-            .then((result) => {
-                addCarRows(result, 'cars-table');
-                cleanEditCarForm();
-            });
-    }); 
 });
